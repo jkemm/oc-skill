@@ -1,15 +1,73 @@
-from mycroft import MycroftSkill, intent_file_handler
+from adapt.intent import IntentBuilder
+from mycroft import util
+from mycroft.skills.core import MycroftSkill, intent_handler
+import ocSkill.graphDBConnector as db
+# import Oc.config as c
+
+from SPARQLWrapper import SPARQLWrapper, JSON
+
+sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCSS2020')
+sparql.setCredentials('oc1920', 'Oc1920!')
+sparql.setReturnFormat(JSON)
+fillwords = [
+    'of a',
+    'of an',
+    'the',
+    'for',
+    'a',
+    'an',
+    'of',
+    'about'
+]
+
+endwords = [
+    '.org',
+    '.com',
+    '.at'
+]
+
+
+def get_definition(name):
+    results = search(name, SEARCH_NAME_QUERY)
+    if len(results) == 0:
+        return None
+
+    definition = results[0]['definition']['value']
+    return definition
 
 
 class Oc(MycroftSkill):
     def __init__(self):
-        MycroftSkill.__init__(self)
+        super(Oc, self).__init__(name="Oc")
+        self.lastSearchTerm = ""
 
-    @intent_file_handler('oc.intent')
-    def handle_oc(self, message):
-        self.speak_dialog('oc')
+    @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
+    def handle_search_definition_intent(self, message):
+        self.speak(message.data.get("SearchTerm"))
+        if message.data.get("SearchTerm") == "person":
+            self.speak(db.search_fritz())
+
+        else:
+            self.speak("no")
+            self.speak(db.what_is_handle(message.data.get("SearchTerm")))
+
+
+def speak_no_result(self, term):
+    self.speak_dialog("no.result", data={"term": term})
+
+
+def normalize_search_term(search_term, utterance):
+    search_term = search_term.strip()
+    for word in c.fillwords:
+        if search_term.startswith(word + ' '):
+            search_term = search_term.replace(word + ' ', '', 1)
+
+    for word in c.endwords:
+        if utterance.endswith(word):
+            search_term += word
+
+    return search_term
 
 
 def create_skill():
     return Oc()
-
