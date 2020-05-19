@@ -5,7 +5,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 action_words = ["hometown"]
 detail_words = ["thal", "innsbruck"]
 
-sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCS2020')
+sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCSS2020')
 sparql.setCredentials('oc1920', 'Oc1920!')
 sparql.setReturnFormat(JSON)
 
