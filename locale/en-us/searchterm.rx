@@ -1,1 +1,1 @@
-.* (?P<SearchTerm>.*)
+(?P<SearchTerm>(\w+[-\s\.]?)+)

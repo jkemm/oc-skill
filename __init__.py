@@ -6,7 +6,7 @@ import ocSkill.graphDBConnector as db
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCSS2020')
+sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/kgbook')
 sparql.setCredentials('oc1920', 'Oc1920!')
 sparql.setReturnFormat(JSON)
 fillwords = [
@@ -46,10 +46,12 @@ class Oc(MycroftSkill):
         self.speak(message.data.get("SearchTerm"))
         if message.data.get("SearchTerm") == "person":
             self.speak(db.search_fritz())
-
-        else:
-            self.speak("no")
+        elif message.data.get("search.definition") == "what is":
             self.speak(db.what_is_handle(message.data.get("SearchTerm")))
+        elif message.data.get("search.definition") == "what is the difference between":
+            self.speak(db.what_is_handle(message.data.get("SearchTerm")))
+        elif message.data.get("search.definition") == "what are":
+            self.speak(db.what_are_handle(message.data.get("SearchTerm")))
 
 
 def speak_no_result(self, term):
