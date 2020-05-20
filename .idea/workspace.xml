@@ -21,6 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale/en-us/searchterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/searchterm.rx" afterDir="false" />
+>>>>>>> 8b094870297d1e17564490cc982084eb56e1cb95
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

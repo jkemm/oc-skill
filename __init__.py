@@ -6,9 +6,7 @@ import ocSkill.graphDBConnector as db
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/kgbook')
-sparql.setCredentials('oc1920', 'Oc1920!')
-sparql.setReturnFormat(JSON)
+
 fillwords = [
     'of a',
     'of an',

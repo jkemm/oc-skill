@@ -1,3 +1,4 @@
+
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 # import oc.config as c
@@ -75,3 +76,4 @@ def search(name, query):
     if result:
         return result['results']['bindings']
     return "fail"  # result['results']['bindings']
+
