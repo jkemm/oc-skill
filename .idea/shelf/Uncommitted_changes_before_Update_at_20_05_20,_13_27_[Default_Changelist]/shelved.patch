@@ -1,0 +1,95 @@
+Index: graphDBConnector.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from SPARQLWrapper import SPARQLWrapper, JSON\r\n\r\n# import oc.config as c\r\n\r\naction_words = [\"hometown\"]\r\ndetail_words = [\"thal\", \"innsbruck\"]\r\n\r\nsparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCS2020')\r\nsparql.setCredentials('oc1920', 'Oc1920!')\r\nsparql.setReturnFormat(JSON)\r\n\r\nSEARCH_FRITZ = \"\"\"\r\n        PREFIX schema: <http://schema.org/>\r\n            SELECT ?name \r\n            WHERE {\r\n                ?person schema:name ?name .\r\n                ?person schema:birthDate \"1950-01-01\" .\r\n            }\r\n        \"\"\"\r\n\r\nSEARCH_WHAT_IS_QUERY = \"\"\" PREFIX schema: <http://schema.org/>\r\n            SELECT * \r\n            WHERE {\r\n                ?x schema:name ?name.\r\n                ?x schema:description ?des .\r\n                FILTER (lcase(str(?name)) = \"%s\")\r\n            }\"\"\"\r\n\r\n\r\ndef what_is_handle(name):\r\n    bindings = search(name, SEARCH_WHAT_IS_QUERY)\r\n    if len(bindings) > 0:\r\n        return bindings[0]['des']['value']\r\n    return \"No entry\"\r\n\r\n\r\ndef search_fritz():\r\n    sparql.setQuery(SEARCH_FRITZ)\r\n    result = sparql.query().convert()\r\n    bindings = result['results']['bindings']\r\n    n = bindings[0]['name']['value']\r\n    if len(n) > 0:\r\n        return n\r\n    return \"fail\"\r\n\r\n\r\ndef search(name, query):\r\n    temp_query = query % name\r\n    sparql.setQuery(temp_query)\r\n    result = sparql.query().convert()\r\n    if result:\r\n        return result['results']['bindings']\r\n    return \"fail\"  # result['results']['bindings']\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- graphDBConnector.py	(revision eaa4b360e30cbbba9e3f166dd20ccdddcc1403a3)
++++ graphDBConnector.py	(date 1589908374890)
+@@ -5,7 +5,7 @@
+ action_words = ["hometown"]
+ detail_words = ["thal", "innsbruck"]
+ 
+-sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCS2020')
++sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCSS2020')
+ sparql.setCredentials('oc1920', 'Oc1920!')
+ sparql.setReturnFormat(JSON)
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"BranchesTreeState\">\n    <expand>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n    </expand>\n    <select />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"99619891-75fb-4144-97a3-8ce0f6edce0c\" name=\"Default Changelist\" comment=\"\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/../..\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1bz9XrFp6e00xx3jtedMiUWMcsm\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"configurable.group.tools\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n    </key>\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"99619891-75fb-4144-97a3-8ce0f6edce0c\" name=\"Default Changelist\" comment=\"\" />\n      <created>1589624097354</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1589624097354</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"WindowStateProjectService\">\n    <state x=\"325\" y=\"300\" width=\"633\" height=\"396\" key=\"#com.intellij.fileTypes.FileTypeChooser\" timestamp=\"1589627504731\">\n      <screen x=\"67\" y=\"27\" width=\"1853\" height=\"948\" />\n    </state>\n    <state x=\"325\" y=\"300\" key=\"#com.intellij.fileTypes.FileTypeChooser/67.27.1853.948@67.27.1853.948\" timestamp=\"1589627504731\" />\n    <state x=\"191\" y=\"297\" width=\"633\" height=\"396\" key=\"#com.intellij.fileTypes.FileTypeChooser/67.27.891.939@67.27.891.939\" timestamp=\"1589626512503\" />\n    <state x=\"776\" y=\"258\" width=\"374\" height=\"480\" key=\"FileChooserDialogImpl\" timestamp=\"1589637956797\">\n      <screen x=\"67\" y=\"27\" width=\"1853\" height=\"948\" />\n    </state>\n    <state x=\"776\" y=\"258\" width=\"424\" height=\"484\" key=\"FileChooserDialogImpl/67.27.1853.948@67.27.1853.948\" timestamp=\"1589637956797\" />\n    <state x=\"408\" y=\"256\" width=\"374\" height=\"480\" key=\"FileChooserDialogImpl/67.27.891.939@67.27.891.939\" timestamp=\"1589628760990\" />\n    <state x=\"67\" y=\"130\" key=\"SettingsEditor\" timestamp=\"1589628725706\">\n      <screen x=\"67\" y=\"27\" width=\"891\" height=\"939\" />\n    </state>\n    <state x=\"67\" y=\"130\" key=\"SettingsEditor/67.27.891.939@67.27.891.939\" timestamp=\"1589628725706\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision eaa4b360e30cbbba9e3f166dd20ccdddcc1403a3)
++++ .idea/workspace.xml	(date 1589909067539)
+@@ -19,7 +19,10 @@
+     <select />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="" />
++    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -33,7 +36,7 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
+-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="ProjectId" id="1bz9XrFp6e00xx3jtedMiUWMcsm" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+@@ -70,7 +73,34 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="master" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++    <option name="RECENT_FILTERS">
++      <map>
++        <entry key="Branch">
++          <value>
++            <list>
++              <RecentGroup>
++                <option name="FILTER_VALUES">
++                  <option value="master" />
++                </option>
++              </RecentGroup>
++            </list>
+           </value>
+         </entry>
+       </map>
+@@ -92,5 +122,9 @@
+       <screen x="67" y="27" width="891" height="939" />
+     </state>
+     <state x="67" y="130" key="SettingsEditor/67.27.891.939@67.27.891.939" timestamp="1589628725706" />
++    <state x="764" y="467" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589908318238">
++      <screen x="67" y="27" width="1853" height="1053" />
++    </state>
++    <state x="764" y="467" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1589908318238" />
+   </component>
+ </project>
+\ No newline at end of file

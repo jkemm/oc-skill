@@ -1,0 +1,14 @@
+Index: locale/en-us/searchterm.rx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.* (?P<SearchTerm>.*)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- locale/en-us/searchterm.rx	(revision eaa4b360e30cbbba9e3f166dd20ccdddcc1403a3)
++++ locale/en-us/searchterm.rx	(date 1589974099811)
+@@ -1,1 +1,1 @@
+-.* (?P<SearchTerm>.*)
+\ No newline at end of file
++(?P<SearchTerm>(\w+[-\s\.]?)+)
+\ No newline at end of file

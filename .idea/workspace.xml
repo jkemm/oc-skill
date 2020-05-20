@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="" />
+    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +35,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1bz9XrFp6e00xx3jtedMiUWMcsm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -63,6 +65,14 @@
       <option name="presentableId" value="Default" />
       <updated>1589624097354</updated>
     </task>
+    <task id="LOCAL-00001" summary="added what are questions">
+      <created>1589979464799</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589979464799</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,12 +87,20 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added what are questions" />
+    <option name="LAST_COMMIT_MESSAGE" value="added what are questions" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="325" y="300" width="633" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589627504731">
       <screen x="67" y="27" width="1853" height="948" />
     </state>
     <state x="325" y="300" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.948@67.27.1853.948" timestamp="1589627504731" />
     <state x="191" y="297" width="633" height="396" key="#com.intellij.fileTypes.FileTypeChooser/67.27.891.939@67.27.891.939" timestamp="1589626512503" />
+    <state x="167" y="127" width="1082" height="852" key="DiffContextDialog" timestamp="1589979354071">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="167" y="127" width="1082" height="852" key="DiffContextDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1589979354071" />
     <state x="776" y="258" width="374" height="480" key="FileChooserDialogImpl" timestamp="1589637956797">
       <screen x="67" y="27" width="1853" height="948" />
     </state>
@@ -92,5 +110,13 @@
       <screen x="67" y="27" width="891" height="939" />
     </state>
     <state x="67" y="130" key="SettingsEditor/67.27.891.939@67.27.891.939" timestamp="1589628725706" />
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589979487547">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1589979487547" />
+    <state x="479" y="468" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589974106476">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="479" y="468" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1589974106476" />
   </component>
 </project>
