@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../mycroft/skills/oc-skill" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../testfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
-    </list>
+    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="merge + similarity search basic" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +63,14 @@
       <option name="presentableId" value="Default" />
       <updated>1589624097354</updated>
     </task>
+    <task id="LOCAL-00001" summary="merge + similarity search basic">
+      <created>1590238459370</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590238459370</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,6 +84,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merge + similarity search basic" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge + similarity search basic" />
   </component>
   <component name="WindowStateProjectService">
     <state x="325" y="300" width="633" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589627504731">
