@@ -44,12 +44,8 @@ class Oc(MycroftSkill):
         self.speak(message.data.get("SearchTerm"))
         if message.data.get("SearchTerm") == "person":
             self.speak(db.search_fritz())
-        elif message.data.get("search.definition") == "what is":
-            self.speak(db.what_is_handle(message.data.get("SearchTerm")))
-        elif message.data.get("search.definition") == "what is the difference between":
-            self.speak(db.what_is_handle(message.data.get("SearchTerm")))
-        elif message.data.get("search.definition") == "what are":
-            self.speak(db.what_are_handle(message.data.get("SearchTerm")))
+        else:
+            self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
 
 
 def speak_no_result(self, term):
