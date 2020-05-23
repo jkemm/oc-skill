@@ -25,15 +25,6 @@ endwords = [
 ]
 
 
-def get_definition(name):
-    results = search(name, SEARCH_NAME_QUERY)
-    if len(results) == 0:
-        return None
-
-    definition = results[0]['definition']['value']
-    return definition
-
-
 class Oc(MycroftSkill):
     def __init__(self):
         super(Oc, self).__init__(name="Oc")
