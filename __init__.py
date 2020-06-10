@@ -6,7 +6,6 @@ import ocSkill.graphDBConnector as db
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-
 fillwords = [
     'of a',
     'of an',
@@ -33,10 +32,7 @@ class Oc(MycroftSkill):
     @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
     def handle_search_definition_intent(self, message):
         self.speak(message.data.get("SearchTerm"))
-        if message.data.get("SearchTerm") == "person":
-            self.speak(db.search_fritz())
-        else:
-            self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
+        self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
 
 
 def speak_no_result(self, term):
