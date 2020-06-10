@@ -1,12 +1,12 @@
-
 from SPARQLWrapper import SPARQLWrapper, JSON
+import difflib as diff
 
 # import oc.config as c
 
 action_words = ["hometown"]
 detail_words = ["thal", "innsbruck"]
 
-sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/kgbook')
+sparql = SPARQLWrapper('http://graphdb.sti2.at:8080/repositories/OCSS2020')
 sparql.setCredentials('oc1920', 'Oc1920!')
 sparql.setReturnFormat(JSON)
 
@@ -27,12 +27,54 @@ SEARCH_WHAT_IS_ARE_QUERY = """ PREFIX schema: <http://schema.org/>
                 FILTER ((contains( "%s", lcase(str(?name)))) || (contains(lcase(str(?name)), "%s")))
             }"""
 
+SEARCH_WHAT_IS_QUERY_SIM = """ PREFIX schema: <http://schema.org/>
+            SELECT * 
+            WHERE {
+                ?x schema:name ?name.
+                ?x schema:description ?des .
+            }"""
+
+
+WHAT_IS_ARE_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?entity ?score ?des{
+  ?search a inst:get_description ;
+      :query  "%s" ;
+      :entities ?entity .
+    ?entity :score ?score .
+    ?entity schema:description ?des 
+  
+}
+"""
+
 
 def what_is_are_handle(name):
-    bindings = search(name, SEARCH_WHAT_IS_ARE_QUERY)
+    bindings = search1(name, WHAT_IS_ARE_QUERY)
     if len(bindings) > 0:
         return bindings[0]['des']['value']
     return "No entry"
+
+
+def what_is_sim_handle(name):
+    bindings = search2(name, SEARCH_WHAT_IS_QUERY_SIM)
+    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
+    result = bindings[0]
+
+    for b in bindings:
+        temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
+        if sim < temp:
+            sim = temp
+            result = b
+
+    if sim > 0.9:
+        return result['des']['value']
+    return "Nothing similar found"
+
+
+# def difference_handler(name1, name2):
 
 
 def search_fritz():
@@ -53,3 +95,20 @@ def search(name, query):
         return result['results']['bindings']
     return "fail"  # result['results']['bindings']
 
+
+def search1(name, query):
+    temp_query = query % name
+    sparql.setQuery(temp_query)
+    result = sparql.query().convert()
+    if result:
+        return result['results']['bindings']
+    return "fail"  # result['results']['bindings']
+
+
+def search2(name, query):
+    temp_query = query
+    sparql.setQuery(temp_query)
+    result = sparql.query().convert()
+    if result:
+        return result['results']['bindings']
+    return "fail"  # result['results']['bindings']

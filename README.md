@@ -3,6 +3,9 @@ Online communication group 2 test
 
 ## About
 
+## Requirements
+Mycroft and SPARQLWrapper (mycroft-pip install sparqlwrapper)
+
 
 ## Examples
 * "What is a graph"
