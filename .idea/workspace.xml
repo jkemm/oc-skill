@@ -20,17 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="test">
-      <change afterPath="$PROJECT_DIR$/locale/en-us/diff.definition.voc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locale/en-us/diffterm.rx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ocSkill.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ocSkill.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_20__20_09__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/en-us/search.definition.voc" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/search.definition.voc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/en-us/searchterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/searchterm.rx" afterDir="false" />
       <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/.gitignore" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/.gitignore" afterDir="false" />
       <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/LICENSE" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/LICENSE" afterDir="false" />
       <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/README.md" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/README.md" afterDir="false" />
@@ -79,7 +70,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_COMMON_BRANCH" value="martin_test" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/mycroftskill-oc-knowledge-book" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="ProjectId" id="1bz9XrFp6e00xx3jtedMiUWMcsm" />

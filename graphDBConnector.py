@@ -2,7 +2,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import difflib as diff
 
 # import oc.config as c
-
+tolerance = 0
 action_words = ["hometown"]
 detail_words = ["thal", "innsbruck"]
 
@@ -34,47 +34,28 @@ SEARCH_WHAT_IS_QUERY_SIM = """ PREFIX schema: <http://schema.org/>
                 ?x schema:description ?des .
             }"""
 
-
 WHAT_IS_ARE_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
-SELECT ?entity ?score ?des{
-  ?search a inst:get_description ;
-      :query  "%s" ;
+SELECT ?entity ?score ?des ?name{
+  ?search a inst:get_definition ;
+      :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
-    ?entity schema:description ?des 
+    ?entity schema:description ?des .
+    ?entity schema:name ?name
   
 }
 """
 
 
 def what_is_are_handle(name):
-    bindings = search1(name, WHAT_IS_ARE_QUERY)
-    if len(bindings) > 0:
-        return bindings[0]['des']['value']
+    binding = search(name, WHAT_IS_ARE_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']
     return "No entry"
-
-
-def what_is_sim_handle(name):
-    bindings = search2(name, SEARCH_WHAT_IS_QUERY_SIM)
-    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
-    result = bindings[0]
-
-    for b in bindings:
-        temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
-        if sim < temp:
-            sim = temp
-            result = b
-
-    if sim > 0.9:
-        return result['des']['value']
-    return "Nothing similar found"
-
-
-# def difference_handler(name1, name2):
 
 
 def search_fritz():
@@ -88,27 +69,23 @@ def search_fritz():
 
 
 def search(name, query):
-    temp_query = query % (name, name)
-    sparql.setQuery(temp_query)
-    result = sparql.query().convert()
-    if result:
-        return result['results']['bindings']
-    return "fail"  # result['results']['bindings']
-
-
-def search1(name, query):
     temp_query = query % name
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
     if result:
-        return result['results']['bindings']
+        return check_similarity(result['results']['bindings'], name)
     return "fail"  # result['results']['bindings']
 
 
-def search2(name, query):
-    temp_query = query
-    sparql.setQuery(temp_query)
-    result = sparql.query().convert()
-    if result:
-        return result['results']['bindings']
-    return "fail"  # result['results']['bindings']
+def check_similarity(bindings, name):
+    result = bindings[0]
+    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
+    for b in bindings:
+        temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
+        if sim < temp:
+            sim = temp
+            result = b
+
+    if sim > tolerance:
+        return result
+    return "No entry"
