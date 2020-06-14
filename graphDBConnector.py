@@ -50,6 +50,23 @@ SELECT ?entity ?score ?des ?name{
 }
 """
 
+HOW_DOES_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?entity ?score ?des{
+  ?search a inst:get_definition ;
+      :query  "semi-automatic editing supports" ;
+      :entities ?entity .
+    ?entity :score ?score .
+    ?entity schema:description ?des 
+
+}
+"""
+
+
+
 
 def what_is_are_handle(name):
     binding = search(name, WHAT_IS_ARE_QUERY)
