@@ -45,6 +45,11 @@ class Oc(MycroftSkill):
         self.speak(searchterm)
         self.speak(db.usage_handle(searchterm))
 
+    @intent_handler(IntentBuilder("").require("search.example").require("SearchTerm").build())
+    def handle_search_examples_intent(self, message):
+        self.speak(message.data.get("SearchTerm"))
+        self.speak(db.example_handle(message.data.get("SearchTerm")))
+
 
 def speak_no_result(self, term):
     self.speak_dialog("no.result", data={"term": term})
