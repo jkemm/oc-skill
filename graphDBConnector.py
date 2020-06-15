@@ -50,9 +50,55 @@ SELECT ?entity ?score ?des ?name{
 }
 """
 
+WHAT_IS_DIFFERENCE_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?entity ?score ?name ?des{
+  ?search a inst:get_difference ;
+      :query  "%s~" ;
+      :entities ?entity .
+    ?entity :score ?score .
+    ?entity schema:description ?des .
+    ?entity schema:name ?name
+}
+"""
+
+WHAT_IS_USAGE_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?entity ?score ?des ?name{
+  ?search a inst:get_usage ;
+      :query  "%s" ;
+      :entities ?entity .
+    ?entity :score ?score .
+    ?entity schema:description ?des .
+    ?entity schema:name ?name
+  
+}
+"""
+
 
 def what_is_are_handle(name):
     binding = search(name, WHAT_IS_ARE_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']
+    return "No entry"
+
+
+def difference_handle(name1, name2):
+    combined_name = "name1:" + name1 + " name2:" + name2
+    binding = search(combined_name, WHAT_IS_DIFFERENCE_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']
+    return "No entry"
+
+
+def usage_handle(name):
+    binding = search(name, WHAT_IS_USAGE_QUERY)
     if binding != "No entry":
         return binding['des']['value']
     return "No entry"
@@ -73,12 +119,15 @@ def search(name, query):
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
     if result:
-        return check_similarity(result['results']['bindings'], name)
+        return check_sim(result['results']['bindings'], name)
     return "fail"  # result['results']['bindings']
 
 
 def check_similarity(bindings, name):
+    if len(bindings) <= 0:
+        return "No entry"
     result = bindings[0]
+
     sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
     for b in bindings:
         temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
@@ -89,3 +138,27 @@ def check_similarity(bindings, name):
     if sim > tolerance:
         return result
     return "No entry"
+
+def check_sim(bindings, name):
+    if len(bindings) <= 0:
+        return "No entry"
+    elif len(bindings) < 2:
+        return bindings[0]
+
+    result = bindings[0]
+    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
+
+    for b in bindings:
+        if b['score']['value'] < result['score']['value']:
+            break
+
+        temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
+        if sim < temp:
+            sim = temp
+            result = b
+
+    return result
+
+
+
+

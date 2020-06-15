@@ -20,41 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="test">
+      <change afterPath="$PROJECT_DIR$/locale/en-us/diffterm1.rx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/locale/en-us/usage.definition.voc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/.gitignore" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/.gitignore" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/LICENSE" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/LICENSE" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/README.md" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/README.md" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/__init__.py" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/__init__.py" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/config.py" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/config.py" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/dialog/en-us/get.chapter.summary.dialog" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/dialog/en-us/get.chapter.summary.dialog" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/doc/master-seminar-STI-final-presentation-group-C.pdf" beforeDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/doc/master-seminar-STI-final-report-group-C.pdf" beforeDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/doc/master-seminar-STI-latest-progress-group-C.pdf" beforeDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/doc/master-seminar-STI-midterm-presentation-group-C.pdf" beforeDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/doc/master-seminar-STI-vocabulary-group-C.pdf" beforeDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/graphDBConnector.py" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/graphDBConnector.py" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/regex/en-us/searchterm.rx" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/regex/en-us/searchterm.rx" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/test/test_graphDBConector.py" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/test/test_graphDBConector.py" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.author.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.author.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.broader.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.broader.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.find.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.find.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.page.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.page.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.summary.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.summary.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.where.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.chapter.where.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.description.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.description.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.example.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.example.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.image.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.image.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.narrower.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.narrower.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.person.achievement.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.person.achievement.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.person.description.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.person.description.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.one.context.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.one.context.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.one.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.one.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.two.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.relations.of.two.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.synonyms.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.synonyms.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.table.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.table.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.time.context.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.time.context.voc" afterDir="false" />
-      <change beforePath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.time.voc" beforeDir="false" afterPath="$USER_HOME$/mycroftskill-oc-knowledge-book/vocab/en-us/search.time.voc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale/en-us/diff.definition.voc" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/diff.definition.voc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale/en-us/diffterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/diffterm2.rx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale/en-us/searchterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/searchterm.rx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
