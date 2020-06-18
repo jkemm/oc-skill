@@ -90,9 +90,9 @@ SELECT ?entity ?des{
 
 ########
 # Query for HowToSteps, returns one result with highest score, Step Position + Step Text
-#Example: How does the verification process work?
+# Example: How does the verification process work?
 ########
-SEARCH_HOW_TO_STEP_QUERY ="""
+SEARCH_HOW_TO_STEP_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
@@ -110,8 +110,86 @@ SEARCH_HOW_TO_STEP_QUERY ="""
     }
 """
 
+#######################################################################################
 
+########
+# Query for HowMany, returns usedByNumberOfPeople 
+# Example: How many households are smart speakers already introduced
+########
+SEARCH_HOW_MANY_QUERY = """
+    PREFIX : <http://www.ontotext.com/connectors/lucene#>
+    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+    PREFIX schema: <http://schema.org/>
+    PREFIX knowledgeGraph: <http://www.knowledgegraphbook.ai/schema/>
 
+    SELECT ?counter{
+      ?search a inst:get_howMany ;
+          :query  "%s" ;
+          :entities ?entity .
+        ?entity :score ?score .
+      ?entity knowledgeGraph:usedByNumberOfPeople ?counter .
+}
+"""
+
+########
+# Query for HowOften, searches name and returns userInteractionCount 
+# Example: How often is Schema.org used?
+########
+SEARCH_HOW_OFTEN_QUERY = """
+    PREFIX : <http://www.ontotext.com/connectors/lucene#>
+    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT ?entity ?counter {
+      ?search a inst:get_howOften ;
+          :query  "%s" ;
+          :entities ?entity .
+        ?entity :score ?score .
+      ?entity schema:interactionStatistic ?interaction.
+      ?interaction schema:userInteractionCount ?counter .
+}
+"""
+
+######## ?datePublished ?authorname
+# Query for related Literature, searches name (e.g. Machine Learning, Schema.org, ...) and returns information about related article 
+# Example: How often is Schema.org used?
+########
+SEARCH_RELATED_LITERATURE_QUERY = """
+    PREFIX : <http://www.ontotext.com/connectors/lucene#>
+    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+    PREFIX schema: <http://schema.org/>
+    PREFIX knowledge: <http://www.knowledgegraphbook.ai/schema/>
+
+    SELECT * {
+      ?search a inst:get_additionalLiterature  ;
+          :query  "%s" ;
+          :entities ?entity .
+        ?entity :score ?score .
+        ?entity knowledge:relatedLiterature ?relatedLiterature .
+        ?relatedLiterature schema:headline ?headline .
+        ?relatedLiterature schema:datePublished ?datePublished .
+        ?relatedLiterature schema:author ?author .
+        ?author schema:name ?authorname .   
+}
+"""
+
+########
+# Query for how can, searches name and returns description --> TODO: kann man da auch die What is query verwenden? 
+# Example: How often is Schema.org used?
+########
+SEARCH_HOW_CAN_QUERY = """
+   PREFIX : <http://www.ontotext.com/connectors/lucene#>
+   PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+   PREFIX schema: <http://schema.org/>
+
+   SELECT ?des {
+     ?search a inst:get_howCan ;
+         :query  "%s" ;
+         :entities ?entity .
+       ?entity :score ?score .
+       ?entity schema:description ?des .  
+}
+"""
 
 SEARCH_EXAMPLE_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
@@ -146,21 +224,50 @@ def in_which_handle(name):
     return "No entry"
 
 
-def how_does_handle(name)
+def how_does_handle(name):
     binding = search(name, HOW_DOES_QUERY)
     if binding != "No entry":
         return binding['des']['value']
     return "No entry"
 
 
-def how_to_step_handle(name)
+def how_to_step_handle(name):
     binding = search(name, SEARCH_HOW_TO_STEP_QUERY)
     if binding != "No entry":
         return binding['stepName']['value']
     return "No entry"
 
 
+#####################################
+def how_many_handle(name):
+    binding = search(name, SEARCH_HOW_MANY_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']  # TODO:Was übernimmt binding
+    return "No entry"
 
+
+def how_often_handle(name):
+    binding = search(name, SEARCH_HOW_OFTEN_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']  # TODO:Was übernimmt binding
+    return "No entry"
+
+
+def related_literature_handle(name):
+    binding = search_multiple(name, SEARCH_RELATED_LITERATURE_QUERY)
+    if binding != "No entry":
+        return binding  # TODO:Was übernimmt binding und was bedeutet des?
+    return "No entry"
+
+
+def how_can_handle(name):
+    binding = search(name, SEARCH_HOW_CAN_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']  # TODO:Was übernimmt binding und was bedeutet des?
+    return "No entry"
+
+
+#####################################
 
 
 def example_handle(name):
