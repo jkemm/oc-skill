@@ -51,6 +51,9 @@ SELECT * {
 """
 
 WHAT_IS_DIFFERENCE_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
 SELECT ?entity ?score ?name ?des{
   ?search a inst:get_difference ;
       :query  "%s~" ;
