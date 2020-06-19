@@ -56,7 +56,7 @@ PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 SELECT ?entity ?score ?name ?des{
   ?search a inst:get_difference ;
-      :query  "%s~" ;
+      :query  "%s" ;
       :entities ?entity .
     ?entity :score ?score .
     ?entity schema:description ?des .
