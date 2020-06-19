@@ -74,7 +74,7 @@ PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?entity ?des{
-  ?search a inst:get_definition ;
+  ?search a inst:how_does ;
       :query  "%s" ;
       :limit "1" ;
       :entities ?entity .
@@ -390,6 +390,7 @@ def check_sim(bindings, name):
         return bindings[0]
 
     result = bindings[0]
+
     sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
 
     for b in bindings:
