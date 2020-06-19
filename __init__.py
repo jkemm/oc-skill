@@ -39,23 +39,22 @@ class Oc(MycroftSkill):
         self.speak(message.data.get("SearchTerm"))
         self.speak(db.example_handle(message.data.get("SearchTerm")))
 
+    ####################################################################################
 
-####################################################################################
-
-#TODO How Can & how often in search.mthodsHow.voc aber unterschiedliche queries???--> nur eine gemacht muss noch how often machen
+    # TODO How Can & how often in search.mthodsHow.voc aber unterschiedliche queries???--> nur eine gemacht muss noch how often machen
 
     @intent_handler(IntentBuilder("").require("search.methodsHow").require("SearchTerm").build())
     def handle_how_can_intent(self, message):
         self.speak(message.data.get("SearchTerm"))
         self.speak(db.how_can_handle(message.data.get("SearchTerm")))
 
-#related Literature
+    # related Literature
     @intent_handler(IntentBuilder("").require("search.relatedLiterature").require("SearchTerm").build())
     def handle_related_literature_intent(self, message):
         self.speak(message.data.get("SearchTerm"))
         self.speak(db.related_literature_handle(message.data.get("SearchTerm")))
 
-#how many
+    # how many
     @intent_handler(IntentBuilder("").require("search.howMany").require("SearchTerm").build())
     def handle_how_many_intent(self, message):
         self.speak(message.data.get("SearchTerm"))

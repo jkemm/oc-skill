@@ -182,12 +182,13 @@ SEARCH_HOW_CAN_QUERY = """
    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
    PREFIX schema: <http://schema.org/>
 
-   SELECT ?des {
+   SELECT * {
      ?search a inst:get_howCan ;
          :query  "%s" ;
          :entities ?entity .
        ?entity :score ?score .
-       ?entity schema:description ?des .  
+       ?entity schema:description ?des .
+       ?entity schema:name ?name
 }
 """
 
@@ -263,7 +264,7 @@ def related_literature_handle(name):
 def how_can_handle(name):
     binding = search(name, SEARCH_HOW_CAN_QUERY)
     if binding != "No entry":
-        return binding['des']['value']  # TODO:Was übernimmt binding und was bedeutet des?
+        return binding['des']['value']
     return "No entry"
 
 
