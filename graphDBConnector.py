@@ -122,12 +122,13 @@ SEARCH_HOW_MANY_QUERY = """
     PREFIX schema: <http://schema.org/>
     PREFIX knowledgeGraph: <http://www.knowledgegraphbook.ai/schema/>
 
-    SELECT ?counter{
+    SELECT * {
       ?search a inst:get_howMany ;
-          :query  "%s" ;
+          :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
       ?entity knowledgeGraph:usedByNumberOfPeople ?counter .
+      ?entity schema:name ?name 
 }
 """
 
@@ -140,13 +141,14 @@ SEARCH_HOW_OFTEN_QUERY = """
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
 
-    SELECT ?entity ?counter {
+    SELECT * {
       ?search a inst:get_howOften ;
-          :query  "%s" ;
+          :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
       ?entity schema:interactionStatistic ?interaction.
       ?interaction schema:userInteractionCount ?counter .
+      ?entity schema:name ?name
 }
 """
 
@@ -162,14 +164,14 @@ SEARCH_RELATED_LITERATURE_QUERY = """
 
     SELECT * {
       ?search a inst:get_additionalLiterature  ;
-          :query  "%s" ;
+          :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
         ?entity knowledge:relatedLiterature ?relatedLiterature .
         ?relatedLiterature schema:headline ?headline .
         ?relatedLiterature schema:datePublished ?datePublished .
         ?relatedLiterature schema:author ?author .
-        ?author schema:name ?authorname .   
+        ?author schema:name ?name .   
 }
 """
 
@@ -184,7 +186,7 @@ SEARCH_HOW_CAN_QUERY = """
 
    SELECT * {
      ?search a inst:get_howCan ;
-         :query  "%s" ;
+         :query  "%s~" ;
          :entities ?entity .
        ?entity :score ?score .
        ?entity schema:description ?des .
@@ -240,28 +242,28 @@ def how_to_step_handle(name):
 
 
 #####################################
-def how_many_handle(name):
+def how_many_handle(name): #is working
     binding = search(name, SEARCH_HOW_MANY_QUERY)
     if binding != "No entry":
-        return binding['des']['value']  # TODO:Was übernimmt binding
+        return binding['counter']['value']
     return "No entry"
 
 
-def how_often_handle(name):
+def how_often_handle(name): #is working
     binding = search(name, SEARCH_HOW_OFTEN_QUERY)
     if binding != "No entry":
-        return binding['des']['value']  # TODO:Was übernimmt binding
+        return binding['counter']['value']
     return "No entry"
 
 
-def related_literature_handle(name):
-    binding = search_multiple(name, SEARCH_RELATED_LITERATURE_QUERY)
+def related_literature_handle(name): #TODO kann man da auch mehrere Felder ausgeben?
+    binding = search(name, SEARCH_RELATED_LITERATURE_QUERY)
     if binding != "No entry":
-        return binding  # TODO:Was übernimmt binding und was bedeutet des?
+        return binding['headline']['value']
     return "No entry"
 
 
-def how_can_handle(name):
+def how_can_handle(name): #is working
     binding = search(name, SEARCH_HOW_CAN_QUERY)
     if binding != "No entry":
         return binding['des']['value']

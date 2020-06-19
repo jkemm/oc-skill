@@ -60,6 +60,12 @@ class Oc(MycroftSkill):
         self.speak(message.data.get("SearchTerm"))
         self.speak(db.how_many_handle(message.data.get("SearchTerm")))
 
+    #how often
+    @intent_handler(IntentBuilder("").require("search.howOften").require("SearchTerm").build())
+    def handle_how_often_intent(self, message):
+        self.speak(message.data.get("SearchTerm"))
+        self.speak(db.how_often_handle(message.data.get("SearchTerm")))
+
 
 ####################################################################################
 
