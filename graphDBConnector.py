@@ -61,14 +61,19 @@ SELECT ?entity ?score ?name ?des{
 }
 """
 
+########
+# Query for How Does xxx Intent, returns one result with highest score
+# Example: How does semi-automatic editing supports the user?
+########
 HOW_DOES_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
-SELECT ?entity ?score ?des{
+SELECT ?entity ?des{
   ?search a inst:get_definition ;
-      :query  "semi-automatic editing supports" ;
+      :query  "%s" ;
+      :limit "1" ;
       :entities ?entity .
     ?entity :score ?score .
     ?entity schema:description ?des 
@@ -91,6 +96,49 @@ SELECT ?entity ?score ?des ?name{
   
 }
 """
+
+########
+# Query for In Which xxx Intent, returns one result with highest score
+# Example: In which format is the generated annotation source presented by the semantify.it
+########
+IN_WHICH_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+SELECT ?entity ?des{
+  ?search a inst:in_which ;
+      :query  "%s" ;
+      :entities ?entity ;
+      :limit "1" .
+    ?entity :score ?score .
+    ?entity schema:describe ?des 
+}
+"""
+
+########
+# Query for HowToSteps, returns one result with highest score, Step Position + Step Text
+#Example: How does the verification process work?
+########
+SEARCH_HOW_TO_STEP_QUERY ="""
+    PREFIX : <http://www.ontotext.com/connectors/lucene#>
+    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT ?position ?stepText {
+      ?search a inst:get_HowToStep ;
+          :query  "%s" ;
+          :limit "1" ;
+          :entities ?entity .
+        ?entity :score ?score .
+        ?entity schema:step: ?step .        
+        ?step schema:position ?position .
+        ?step schema:text ?stepText .
+        ?entity schema:name ?name
+    }
+"""
+
+
+
 
 SEARCH_EXAMPLE_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
@@ -130,6 +178,30 @@ def usage_handle(name):
     binding = search(name, WHAT_IS_USAGE_QUERY)
     if binding != "No entry":
         return binding['des']['value']
+
+
+def in_which_handle(name):
+    binding = search(name, IN_WHICH_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']
+    return "No entry"
+
+
+def how_does_handle(name):
+    binding = search(name, HOW_DOES_QUERY)
+    if binding != "No entry":
+        return binding['des']['value']
+    return "No entry"
+
+
+def how_to_step_handle(name):
+    binding = search(name, SEARCH_HOW_TO_STEP_QUERY)
+    if binding != "No entry":
+        return binding['stepName']['value']
+    return "No entry"
+
+
+
 
 
 def example_handle(name):
