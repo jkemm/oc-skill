@@ -64,7 +64,8 @@ class Oc(MycroftSkill):
     @intent_handler(IntentBuilder("").require("search.howOften").require("SearchTerm").build())
     def handle_how_often_intent(self, message):
         self.speak(message.data.get("SearchTerm"))
-        self.speak(db.how_often_handle(message.data.get("SearchTerm")))
+        answer = db.how_often_handle(message.data.get("SearchTerm"))
+        self.speak_dialog("counter.found", data={"name": message.data.get("SearchTerm"), "counter": answer})
 
 
 ####################################################################################

@@ -1,0 +1,3 @@
+Here is the requested amount for '{{name}}': {{counter}}
+{{name}} was used {{counter}} times.
+the amount of usages for {{name}} results {{counter}}
