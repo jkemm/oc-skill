@@ -1,5 +1,5 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/book.svg" card_color="#40DBB0" width="50" height="50" style="vertical-align:bottom"/> Oc
-Online communication group 2 test
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/book.svg" card_color="#40DBB0" width="50" height="50" style="vertical-align:bottom"/> OcSkill
+OC Group 2.1 (Mycroft)
 
 ## About
 
@@ -8,10 +8,10 @@ Mycroft and SPARQLWrapper (mycroft-pip install sparqlwrapper)
 
 
 ## Examples
-* "What is a graph"
+* "How does the verification process work?"
 
 ## Credits
-G2
+G2.1
 
 ## Category
 **Information**
