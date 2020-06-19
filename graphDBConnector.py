@@ -89,13 +89,14 @@ PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
-SELECT ?entity ?des{
+SELECT ?entity ?des ?name{
   ?search a inst:how_does ;
       :query  "%s" ;
       :limit "1" ;
       :entities ?entity .
     ?entity :score ?score .
-    ?entity schema:description ?des 
+    ?entity schema:description ?des .
+    ?entity schema:name ?name
 
 }
 """
@@ -124,13 +125,14 @@ IN_WHICH_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-SELECT ?entity ?des{
+SELECT ?entity ?des ?name{
   ?search a inst:in_which ;
       :query  "%s" ;
       :entities ?entity ;
       :limit "1" .
     ?entity :score ?score .
-    ?entity schema:describe ?des 
+    ?entity schema:describe ?des .
+    ?entity schema:name ?name
 }
 """
 
@@ -143,7 +145,7 @@ SEARCH_HOW_TO_STEP_QUERY = """
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
 
-    SELECT ?position ?stepText {
+    SELECT ?position ?stepText ?name {
       ?search a inst:get_HowToStep ;
           :query  "%s" ;
           :limit "1" ;
@@ -309,28 +311,28 @@ def how_to_step_handle(name):
 
 
 #####################################
-def how_many_handle(name): #is working
+def how_many_handle(name):  # is working
     binding = search(name, SEARCH_HOW_MANY_QUERY)
     if binding != "No entry":
         return binding['counter']['value']
     return "No entry"
 
 
-def how_often_handle(name): #is working
+def how_often_handle(name):  # is working
     binding = search(name, SEARCH_HOW_OFTEN_QUERY)
     if binding != "No entry":
         return binding['counter']['value']
     return "No entry"
 
 
-def related_literature_handle(name): #TODO kann man da auch mehrere Felder ausgeben?
+def related_literature_handle(name):  # TODO kann man da auch mehrere Felder ausgeben?
     binding = search(name, SEARCH_RELATED_LITERATURE_QUERY)
     if binding != "No entry":
         return binding['headline']['value']
     return "No entry"
 
 
-def how_can_handle(name): #is working
+def how_can_handle(name):  # is working
     binding = search(name, SEARCH_HOW_CAN_QUERY)
     if binding != "No entry":
         return binding['des']['value']
