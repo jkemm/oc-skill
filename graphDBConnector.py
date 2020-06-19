@@ -62,7 +62,6 @@ SELECT ?entity ?score ?name ?des{
 """
 
 HOW_DOES_QUERY = """
->>>>>>> master
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
