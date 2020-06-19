@@ -64,6 +64,22 @@ SELECT ?entity ?score ?name ?des{
 }
 """
 
+USES_QUERY = """
+    PREFIX : <http://www.ontotext.com/connectors/lucene#>
+    PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+    PREFIX schema: <http://schema.org/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    
+    SELECT * {
+      ?search a inst:get_use ;
+          :query  "%s~" ;
+          :entities ?entity .
+        ?entity :score ?score .
+        ?entity  <http://www.knowledgegraphbook.ai/schema/uses> ?test .
+        ?entity schema:name ?name .
+    	?test schema:name ?usesName
+    }
+"""
 ########
 # Query for How Does xxx Intent, returns one result with highest score
 # Example: How does semi-automatic editing supports the user?
@@ -143,7 +159,7 @@ SEARCH_HOW_TO_STEP_QUERY = """
 #######################################################################################
 
 ########
-# Query for HowMany, returns usedByNumberOfPeople 
+# Query for HowMany, returns usedByNumberOfPeople
 # Example: How many households are smart speakers already introduced
 ########
 SEARCH_HOW_MANY_QUERY = """
@@ -163,7 +179,7 @@ SEARCH_HOW_MANY_QUERY = """
 """
 
 ########
-# Query for HowOften, searches name and returns userInteractionCount 
+# Query for HowOften, searches name and returns userInteractionCount
 # Example: How often is Schema.org used?
 ########
 SEARCH_HOW_OFTEN_QUERY = """
@@ -183,7 +199,7 @@ SEARCH_HOW_OFTEN_QUERY = """
 """
 
 ######## ?datePublished ?authorname
-# Query for related Literature, searches name (e.g. Machine Learning, Schema.org, ...) and returns information about related article 
+# Query for related Literature, searches name (e.g. Machine Learning, Schema.org, ...) and returns information about related article
 # Example: How often is Schema.org used?
 ########
 SEARCH_RELATED_LITERATURE_QUERY = """
@@ -206,7 +222,7 @@ SEARCH_RELATED_LITERATURE_QUERY = """
 """
 
 ########
-# Query for how can, searches name and returns description --> TODO: kann man da auch die What is query verwenden? 
+# Query for how can, searches name and returns description --> TODO: kann man da auch die What is query verwenden?
 # Example: How often is Schema.org used?
 ########
 SEARCH_HOW_CAN_QUERY = """
@@ -268,6 +284,13 @@ def in_which_handle(name):
     binding = search(name, IN_WHICH_QUERY)
     if binding != "No entry":
         return binding['des']['value']
+    return "No entry"
+
+
+def uses_handle(name):
+    binding = search(name, USES_QUERY)
+    if binding != "No entry":
+        return binding['usesName']['value']
     return "No entry"
 
 
@@ -348,13 +371,15 @@ def search(name, query):
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
     if result:
-        return check_sim(result['results']['bindings'], name)
+        return check_similarity(result['results']['bindings'], name)
     return "fail"  # result['results']['bindings']
 
 
 def check_similarity_multiple(bindings, name):
-    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
     final_result = ""
+    if len(bindings) <= 0:
+        return "No entry"
+    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
     for b in bindings:
         temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
         if sim < temp:

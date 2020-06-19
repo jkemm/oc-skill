@@ -19,22 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="test">
-<<<<<<< HEAD
-      <change afterPath="$PROJECT_DIR$/locale/en-us/diffterm1.rx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locale/en-us/usage.definition.voc" afterDir="false" />
+    <list default="true" id="99619891-75fb-4144-97a3-8ce0f6edce0c" name="Default Changelist" comment="added &quot;get examples&quot;">
+      <change afterPath="$PROJECT_DIR$/locale/en-us/search.uses.voc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/en-us/diff.definition.voc" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/diff.definition.voc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/en-us/diffterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/diffterm2.rx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/en-us/searchterm.rx" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/searchterm.rx" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/locale/en-us/search.example.voc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphDBConnector.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphDBConnector.py" afterDir="false" />
->>>>>>> master
+      <change beforePath="$PROJECT_DIR$/locale/en-us/search.example.voc" beforeDir="false" afterPath="$PROJECT_DIR$/locale/en-us/search.example.voc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +53,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/locale/en-us" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/locale/en-us/searchterm.rx" />
   </component>
   <component name="RecentsManager">
@@ -104,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590238801560</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added &quot;get examples&quot;">
+      <created>1592216236639</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1592216236639</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -133,7 +130,8 @@
     <MESSAGE value="merge + similarity search basic" />
     <MESSAGE value="merge + similarity search" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="added &quot;get examples&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added &quot;get examples&quot;" />
   </component>
   <component name="WindowStateProjectService">
     <state x="325" y="300" width="633" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589627504731">
@@ -141,33 +139,36 @@
     </state>
     <state x="325" y="300" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.948@67.27.1853.948" timestamp="1589627504731" />
     <state x="191" y="297" width="633" height="396" key="#com.intellij.fileTypes.FileTypeChooser/67.27.891.939@67.27.891.939" timestamp="1589626512503" />
-    <state x="167" y="125" width="1653" height="750" key="DiffContextDialog" timestamp="1591005459642">
-      <screen x="67" y="27" width="1853" height="948" />
+    <state x="167" y="136" width="1482" height="842" key="DiffContextDialog" timestamp="1592395599350">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state x="167" y="136" width="1482" height="842" key="DiffContextDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1592395599350" />
     <state x="167" y="125" width="1653" height="750" key="DiffContextDialog/67.27.1853.948@67.27.1853.948" timestamp="1591005459642" />
     <state x="776" y="258" width="374" height="480" key="FileChooserDialogImpl" timestamp="1591005396252">
       <screen x="67" y="27" width="1853" height="948" />
     </state>
     <state x="776" y="258" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.948@67.27.1853.948" timestamp="1591005396252" />
     <state x="408" y="256" width="374" height="480" key="FileChooserDialogImpl/67.27.891.939@67.27.891.939" timestamp="1589628760990" />
-    <state x="247" y="115" width="1482" height="788" key="MergeDialog" timestamp="1592146534446">
+    <state x="247" y="115" width="1482" height="872" key="MergeDialog" timestamp="1592595966181">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="247" y="115" key="MergeDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1592146534446" />
+    <state x="247" y="115" width="1482" height="872" key="MergeDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1592595966181" />
     <state x="247" y="106" width="1482" height="788" key="MergeDialog/67.27.1853.948@67.27.1853.948" timestamp="1590237889922" />
-    <state x="67" y="131" key="SettingsEditor" timestamp="1591004719257">
-      <screen x="67" y="27" width="1853" height="948" />
+    <state x="67" y="143" key="SettingsEditor" timestamp="1592583873825">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state x="67" y="143" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1592583873825" />
     <state x="67" y="131" key="SettingsEditor/67.27.1853.948@67.27.1853.948" timestamp="1591004719257" />
     <state x="67" y="130" key="SettingsEditor/67.27.891.939@67.27.891.939" timestamp="1589628725706" />
-    <state x="588" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1590239095822">
-      <screen x="67" y="27" width="1853" height="948" />
-    </state>
-    <state x="588" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.948@67.27.1853.948" timestamp="1590239095822" />
-    <state x="764" y="458" width="458" height="189" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592146503161">
+    <state x="588" y="259" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592216280231">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="764" y="458" width="458" height="189" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1592146503161" />
+    <state x="588" y="259" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1592216280231" />
+    <state x="588" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.948@67.27.1853.948" timestamp="1590239095822" />
+    <state x="764" y="458" width="458" height="189" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592598931558">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="764" y="458" width="458" height="189" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1592598931558" />
     <state x="764" y="415" width="448" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.948@67.27.1853.948" timestamp="1590237771631" />
   </component>
 </project>
