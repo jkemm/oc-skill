@@ -281,7 +281,7 @@ def how_does_handle(name):
 def how_to_step_handle(name):
     binding = search(name, SEARCH_HOW_TO_STEP_QUERY)
     if binding != "No entry":
-        return binding['stepName']['value']
+        return binding['stepText']['value']
     return "No entry"
 
 

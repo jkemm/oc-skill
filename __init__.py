@@ -79,6 +79,23 @@ class Oc(MycroftSkill):
         self.speak_dialog("counter.found", data={"name": message.data.get("SearchTerm"), "counter": answer})
 
 
+    ######################
+    # how does
+    @intent_handler(IntentBuilder("").require("search.howDoes").require("SearchTerm").build())
+    def handle_how_does_intent(self, message):
+        self.speak(message.data.get("SearchTerm"))
+        self.speak(db.how_does_handle(message.data.get("SearchTerm")))
+        #self.speak(db.how_to_step_handle(message.data.get("SearchTerm")))
+
+    # in which
+    @intent_handler(IntentBuilder("").require("search.inWhich").require("SearchTerm").build())
+    def handle_in_which_intent(self, message):
+        self.speak(message.data.get("SearchTerm"))
+        self.speak(db.in_which_handle(message.data.get("SearchTerm")))
+
+
+
+
 ####################################################################################
 
 def speak_no_result(self, term):
