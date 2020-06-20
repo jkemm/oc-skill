@@ -31,7 +31,7 @@ class Oc(MycroftSkill):
     @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
     def handle_search_definition_intent(self, message):
         self.speak(message.data.get("SearchTerm"))
-        #self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
+        self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
 
     @intent_handler(IntentBuilder("").require("diff.definition").require("SearchTerm").build())
     def handle_difference_intent(self, message):
