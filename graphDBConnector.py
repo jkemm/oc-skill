@@ -298,17 +298,22 @@ def uses_handle(name):
     return "No entry"
 
 
-def how_does_handle(name):
-    binding = search(name, HOW_DOES_QUERY)
-    if binding != "No entry":
-        return binding['des']['value']
-    return "No entry"
+#def how_does_handle(name):         # integrated into how_to_step_handle
+#    binding = search(name, HOW_DOES_QUERY)
+#    if binding != "No entry":
+#        return binding['des']['value']
+#    return "No entry"
 
 
 def how_to_step_handle(name):
-    binding = search(name, SEARCH_HOW_TO_STEP_QUERY)
+    bindingSteps = search(name, SEARCH_HOW_TO_STEP_QUERY)  # get howtosteps            -> position stepText
+    binding = search(name, HOW_DOES_QUERY)                 # Get how does description  -> des
+    if bindingSteps != "No entry":
+        all_binding = binding['des']['value'] + "\n\n Additonally I have the HowToSteps: " + bindingSteps['position']['value'] +". "+ bindingSteps['stepText']['value'] 
+        return all_binding 
+
     if binding != "No entry":
-        return binding['stepText']['value']
+        return binding['des']['value']
     return "No entry"
 
 

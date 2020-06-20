@@ -76,8 +76,8 @@ class Oc(MycroftSkill):
     def handle_how_does_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
         self.speak(searchterm)
-        self.speak(db.how_does_handle(searchterm))
-        # self.speak(db.how_to_step_handle(message.data.get("SearchTerm")))
+        #self.speak(db.how_does_handle(searchterm))
+        self.speak(db.how_to_step_handle(searchterm))
 
     # in which
     @intent_handler(IntentBuilder("").require("search.inWhich").require("SearchTerm").build())
