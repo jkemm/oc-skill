@@ -202,7 +202,7 @@ SEARCH_HOW_OFTEN_QUERY = """
 }
 """
 
-######## ?datePublished ?authorname
+########
 # Query for related Literature, searches name (e.g. Machine Learning, Schema.org, ...) and returns information about related article
 # Example: How often is Schema.org used?
 ########
@@ -226,7 +226,7 @@ SEARCH_RELATED_LITERATURE_QUERY = """
 """
 
 ########
-# Query for how can, searches name and returns description --> TODO: kann man da auch die What is query verwenden?
+# Query for how can, searches name and returns description
 # Example: How often is Schema.org used?
 ########
 SEARCH_HOW_CAN_QUERY = """
@@ -298,7 +298,7 @@ def uses_handle(name):
     return "No entry"
 
 
-#def how_does_handle(name):         # integrated into how_to_step_handle
+# def how_does_handle(name):         # integrated into how_to_step_handle
 #    binding = search(name, HOW_DOES_QUERY)
 #    if binding != "No entry":
 #        return binding['des']['value']
@@ -307,10 +307,11 @@ def uses_handle(name):
 
 def how_to_step_handle(name):
     bindingSteps = search(name, SEARCH_HOW_TO_STEP_QUERY)  # get howtosteps            -> position stepText
-    binding = search(name, HOW_DOES_QUERY)                 # Get how does description  -> des
+    binding = search(name, HOW_DOES_QUERY)  # Get how does description  -> des
     if bindingSteps != "No entry":
-        all_binding = binding['des']['value'] + "\n\n Additonally I have the HowToSteps: " + bindingSteps['position']['value'] +". "+ bindingSteps['stepText']['value'] 
-        return all_binding 
+        all_binding = binding['des']['value'] + "\n\n Additonally I have the HowToSteps: " + bindingSteps['position'][
+            'value'] + ". " + bindingSteps['stepText']['value']
+        return all_binding
 
     if binding != "No entry":
         return binding['des']['value']
@@ -318,30 +319,32 @@ def how_to_step_handle(name):
 
 
 #####################################
-def how_many_handle(name):  # is working
+def how_many_handle(name):
     binding = search(name, SEARCH_HOW_MANY_QUERY)
     if binding != "No entry":
         return binding['counter']['value']
     return "No entry"
 
 
-def how_often_handle(name):  # is working
+def how_often_handle(name):
     binding = search(name, SEARCH_HOW_OFTEN_QUERY)
     if binding != "No entry":
         return binding['counter']['value']
     return "No entry"
 
 
-def related_literature_handle(name):  # TODO kann man da auch mehrere Felder ausgeben?
+def related_literature_handle(name):
     binding_authors = search_multiple(name, SEARCH_RELATED_LITERATURE_QUERY, "authorname")
     binding = search(name, SEARCH_RELATED_LITERATURE_QUERY)
     if binding != "No entry":
-        all_binding = binding['headline']['value'] + binding['datePublished']['value'] + binding_authors
-        return all_binding
-    return "No entry"
+        binding_headline = binding['name']['value']
+        binding_publisheddate = binding['datePublished']['value']
+        return binding_authors, binding_headline, binding_publisheddate
+    else:
+        return None, "No entry", None
 
 
-def how_can_handle(name):  # is working
+def how_can_handle(name):
     binding = search(name, SEARCH_HOW_CAN_QUERY)
     if binding != "No entry":
         return binding['des']['value']

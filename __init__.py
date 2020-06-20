@@ -20,87 +20,117 @@ class Oc(MycroftSkill):
     @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
     def handle_search_definition_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(db.what_is_are_handle(searchterm))
+        result = db.what_is_are_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     @intent_handler(IntentBuilder("").require("diff.definition").require("SearchTerm").build())
     def handle_difference_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
         name1, name2 = get_names(searchterm)
-        self.speak(db.difference_handle(name1, name2))
+        result = db.difference_handle(name1, name2)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     @intent_handler(IntentBuilder("").require("usage.definition").require("SearchTerm").build())
     def handle_usage_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(db.usage_handle(searchterm))
+        result = db.usage_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     @intent_handler(IntentBuilder("").require("search.example").require("SearchTerm").build())
     def handle_search_examples_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(db.example_handle(searchterm))
+        result = db.example_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak_dialog("found.example", data={"examples": result, "name": searchterm})
 
     ####################################################################################
-
-    # TODO How Can & how often in search.mthodsHow.voc aber unterschiedliche queries???--> nur eine gemacht muss noch how often machen
 
     @intent_handler(IntentBuilder("").require("search.methodsHow").require("SearchTerm").build())
     def handle_how_can_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        self.speak(db.how_can_handle(searchterm))
+        result = db.how_can_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     # related Literature
     @intent_handler(IntentBuilder("").require("search.relatedLiterature").require("SearchTerm").build())
     def handle_related_literature_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        self.speak(db.related_literature_handle(searchterm))
+        binding_authors, binding_headline, binding_publisheddate = db.related_literature_handle(searchterm)
+        if binding_headline == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak_dialog("found.literature", data={"author": binding_authors, "headline": binding_headline,
+                                                        "publishedDate": binding_publisheddate, "name": searchterm})
 
     # how many
     @intent_handler(IntentBuilder("").require("search.howMany").require("SearchTerm").build())
     def handle_how_many_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        self.speak(db.how_many_handle(searchterm))
+        result = db.how_many_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak_dialog("counter.found", data={"name": searchterm, "counter": result})
 
     # how often
     @intent_handler(IntentBuilder("").require("search.howOften").require("SearchTerm").build())
     def handle_how_often_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        answer = db.how_often_handle(searchterm)
-        self.speak_dialog("counter.found", data={"name": message.data.get("SearchTerm"), "counter": answer})
+        result = db.how_often_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak_dialog("counter.found", data={"name": searchterm, "counter": result})
 
     ######################
     # how does
     @intent_handler(IntentBuilder("").require("search.howDoes").require("SearchTerm").build())
     def handle_how_does_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        #self.speak(db.how_does_handle(searchterm))
-        self.speak(db.how_to_step_handle(searchterm))
+        result = db.how_to_step_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     # in which
     @intent_handler(IntentBuilder("").require("search.inWhich").require("SearchTerm").build())
     def handle_in_which_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        self.speak(db.in_which_handle(searchterm))
+        result = db.in_which_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
     ####################################################################################
 
     @intent_handler(IntentBuilder("").require("search.uses").require("SearchTerm").build())
     def handle_search_uses_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(searchterm)
-        self.speak(db.uses_handle(searchterm))
+        result = db.uses_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
 
 
 def prepare_searchterm(utterance, searchterm):
     return strip_off_ending(utterance[utterance.index(searchterm):])
-
-
-def speak_no_result(self, term):
-    self.speak_dialog("no.result", data={"term": term})
 
 
 def strip_off_ending(searchterm):

@@ -1,0 +1,2 @@
+Mycroft proposes the following additional literature for the searchterm '{{name}}': '{{headline}}' written by {{author}} published in {{publishedDate}}
+Wow, Mycroft found some additional literature, perfect for you to read. The literature was published in {{publishedDate}} written by {{author}} and the name is '{{headline}}'
