@@ -2,6 +2,7 @@ from adapt.intent import IntentBuilder
 from mycroft import util
 from mycroft.skills.core import MycroftSkill, intent_handler
 import ocSkill.graphDBConnector as db
+import string
 # import Oc.config as c
 
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -21,6 +22,7 @@ class Oc(MycroftSkill):
     def handle_search_definition_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
         result = db.what_is_are_handle(searchterm)
+
         if result == "No entry":
             self.speak_dialog("no.entry", data={"name": searchterm})
         else:
@@ -130,9 +132,11 @@ class Oc(MycroftSkill):
 
 
 def prepare_searchterm(utterance, searchterm):
+    translator = str.maketrans(string.punctuation, ' '*len(string.punctuation))
     utterance = utterance.lower()
     searchterm = searchterm.lower()
-    return strip_off_ending(utterance[utterance.index(searchterm):])
+    term = strip_off_ending(utterance[utterance.index(searchterm):])
+    return term.translate(translator)
 
 
 def strip_off_ending(searchterm):
