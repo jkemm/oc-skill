@@ -6,7 +6,6 @@ import ocSkill.graphDBConnector as db
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-
 endwords = [
     "used",
     "needed"
@@ -20,24 +19,24 @@ class Oc(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
     def handle_search_definition_intent(self, message):
-        st = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
-        self.speak(db.what_is_are_handle(st))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(db.what_is_are_handle(searchterm))
 
     @intent_handler(IntentBuilder("").require("diff.definition").require("SearchTerm").build())
     def handle_difference_intent(self, message):
-        name1, name2 = get_names(message.data.get("SearchTerm"))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        name1, name2 = get_names(searchterm)
         self.speak(db.difference_handle(name1, name2))
 
     @intent_handler(IntentBuilder("").require("usage.definition").require("SearchTerm").build())
     def handle_usage_intent(self, message):
-        searchterm = strip_off_ending(message.data.get("SearchTerm"))
-        self.speak(searchterm)
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
         self.speak(db.usage_handle(searchterm))
 
     @intent_handler(IntentBuilder("").require("search.example").require("SearchTerm").build())
     def handle_search_examples_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.example_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(db.example_handle(searchterm))
 
     ####################################################################################
 
@@ -45,59 +44,63 @@ class Oc(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("search.methodsHow").require("SearchTerm").build())
     def handle_how_can_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.how_can_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.how_can_handle(searchterm))
 
     # related Literature
     @intent_handler(IntentBuilder("").require("search.relatedLiterature").require("SearchTerm").build())
     def handle_related_literature_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.related_literature_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.related_literature_handle(searchterm))
 
     # how many
     @intent_handler(IntentBuilder("").require("search.howMany").require("SearchTerm").build())
     def handle_how_many_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.how_many_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.how_many_handle(searchterm))
 
-    #how often
+    # how often
     @intent_handler(IntentBuilder("").require("search.howOften").require("SearchTerm").build())
     def handle_how_often_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        answer = db.how_often_handle(message.data.get("SearchTerm"))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        answer = db.how_often_handle(searchterm)
         self.speak_dialog("counter.found", data={"name": message.data.get("SearchTerm"), "counter": answer})
-
 
     ######################
     # how does
     @intent_handler(IntentBuilder("").require("search.howDoes").require("SearchTerm").build())
     def handle_how_does_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.how_does_handle(message.data.get("SearchTerm")))
-        #self.speak(db.how_to_step_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.how_does_handle(searchterm))
+        # self.speak(db.how_to_step_handle(message.data.get("SearchTerm")))
 
     # in which
     @intent_handler(IntentBuilder("").require("search.inWhich").require("SearchTerm").build())
     def handle_in_which_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.in_which_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.in_which_handle(searchterm))
 
-
-
-
-####################################################################################
+    ####################################################################################
 
     @intent_handler(IntentBuilder("").require("search.uses").require("SearchTerm").build())
     def handle_search_uses_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        self.speak(db.uses_handle(message.data.get("SearchTerm")))
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(searchterm)
+        self.speak(db.uses_handle(searchterm))
+
 
 def prepare_searchterm(utterance, searchterm):
-    return  strip_off_ending(utterance[utterance.index(searchterm):])
+    return strip_off_ending(utterance[utterance.index(searchterm):])
+
 
 def speak_no_result(self, term):
     self.speak_dialog("no.result", data={"term": term})
-
 
 
 def strip_off_ending(searchterm):

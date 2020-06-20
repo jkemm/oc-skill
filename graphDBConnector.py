@@ -218,10 +218,10 @@ SEARCH_RELATED_LITERATURE_QUERY = """
           :entities ?entity .
         ?entity :score ?score .
         ?entity knowledge:relatedLiterature ?relatedLiterature .
-        ?relatedLiterature schema:headline ?headline .
+        ?relatedLiterature schema:headline ?name .
         ?relatedLiterature schema:datePublished ?datePublished .
         ?relatedLiterature schema:author ?author .
-        ?author schema:name ?name .   
+        ?author schema:name ?authorname .   
 }
 """
 
@@ -328,9 +328,11 @@ def how_often_handle(name):  # is working
 
 
 def related_literature_handle(name):  # TODO kann man da auch mehrere Felder ausgeben?
+    binding_authors = search_multiple(name, SEARCH_RELATED_LITERATURE_QUERY, "authorname")
     binding = search(name, SEARCH_RELATED_LITERATURE_QUERY)
     if binding != "No entry":
-        return binding['headline']['value']
+        all_binding = binding['headline']['value'] + binding['datePublished']['value'] + binding_authors
+        return all_binding
     return "No entry"
 
 
@@ -345,7 +347,7 @@ def how_can_handle(name):  # is working
 
 
 def example_handle(name):
-    binding = search_multiple(name, SEARCH_EXAMPLE_QUERY)
+    binding = search_multiple(name, SEARCH_EXAMPLE_QUERY, "exampleName")
     if binding != "No entry":
         return binding
     return "No entry"
@@ -361,12 +363,12 @@ def search_fritz():
     return "fail"
 
 
-def search_multiple(name, query):
+def search_multiple(name, query, sqlname):
     temp_query = query % name
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
     if result:
-        return check_similarity_multiple(result['results']['bindings'], name)
+        return check_similarity_multiple(result['results']['bindings'], name, sqlname)
     return "fail"
 
 
@@ -379,7 +381,7 @@ def search(name, query):
     return "fail"  # result['results']['bindings']
 
 
-def check_similarity_multiple(bindings, name):
+def check_similarity_multiple(bindings, name, sqlname):
     final_result = ""
     if len(bindings) <= 0:
         return "No entry"
@@ -389,7 +391,7 @@ def check_similarity_multiple(bindings, name):
         if sim < temp:
             sim = temp
         elif sim == temp:
-            final_result = final_result + b['exampleName']['value'] + "\n"
+            final_result = final_result + b[sqlname]['value'] + "\n"
     if sim > tolerance:
         return str(final_result)
     return "No entry"
