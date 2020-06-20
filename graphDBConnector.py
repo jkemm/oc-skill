@@ -38,13 +38,14 @@ WHAT_IS_ARE_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
+PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
 
 SELECT * {
   ?search a inst:get_definition ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
-    ?entity schema:description ?des .
+    ?entity schema:description | kgbr:purpose ?des .
     ?entity schema:name ?name
   
 }
@@ -54,12 +55,13 @@ WHAT_IS_DIFFERENCE_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
+PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
 SELECT ?entity ?score ?name ?des{
   ?search a inst:get_difference ;
       :query  "%s" ;
       :entities ?entity .
     ?entity :score ?score .
-    ?entity schema:description ?des .
+    ?entity schema:description | kgbr:purpose ?des .
     ?entity schema:name ?name
 }
 """

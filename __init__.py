@@ -6,16 +6,6 @@ import ocSkill.graphDBConnector as db
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-fillwords = [
-    'of a',
-    'of an',
-    'the',
-    'for',
-    'a',
-    'an',
-    'of',
-    'about'
-]
 
 endwords = [
     "used",
@@ -30,13 +20,12 @@ class Oc(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("search.definition").require("SearchTerm").build())
     def handle_search_definition_intent(self, message):
-        self.speak(message.data.get("SearchTerm"))
-        #self.speak(db.what_is_are_handle(message.data.get("SearchTerm")))
+        st = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        self.speak(db.what_is_are_handle(st))
 
     @intent_handler(IntentBuilder("").require("diff.definition").require("SearchTerm").build())
     def handle_difference_intent(self, message):
         name1, name2 = get_names(message.data.get("SearchTerm"))
-        self.speak(name1 + " " + name2)
         self.speak(db.difference_handle(name1, name2))
 
     @intent_handler(IntentBuilder("").require("usage.definition").require("SearchTerm").build())
@@ -103,23 +92,12 @@ class Oc(MycroftSkill):
         self.speak(message.data.get("SearchTerm"))
         self.speak(db.uses_handle(message.data.get("SearchTerm")))
 
-
+def prepare_searchterm(utterance, searchterm):
+    return  strip_off_ending(utterance[utterance.index(searchterm):])
 
 def speak_no_result(self, term):
     self.speak_dialog("no.result", data={"term": term})
 
-
-def normalize_search_term(search_term, utterance):
-    search_term = search_term.strip()
-    for word in c.fillwords:
-        if search_term.startswith(word + ' '):
-            search_term = search_term.replace(word + ' ', '', 1)
-
-    for word in c.endwords:
-        if utterance.endswith(word):
-            search_term += word
-
-    return search_term
 
 
 def strip_off_ending(searchterm):
