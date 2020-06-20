@@ -122,19 +122,19 @@ SELECT ?entity ?score ?des ?name{
 ########
 # Query for In Which xxx Intent, returns one result with highest score
 # Example: In which format is the generated annotation source presented by the semantify.it
-########
+########        
 IN_WHICH_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-SELECT ?entity ?des ?name{
+SELECT ?entity ?des ?name {
   ?search a inst:in_which ;
       :query  "%s" ;
       :entities ?entity ;
       :limit "1" .
     ?entity :score ?score .
     ?entity schema:describe ?des .
-    ?entity schema:name ?name
+    ?entity schema:alternateName ?name
 }
 """
 
@@ -287,7 +287,8 @@ def usage_handle(name):
 def in_which_handle(name):
     binding = search(name, IN_WHICH_QUERY)
     if binding != "No entry":
-        return binding['des']['value']
+        all_binding =  binding['name']['value'] + ", " + binding['des']['value'] 
+        return all_binding
     return "No entry"
 
 
