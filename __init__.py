@@ -130,6 +130,8 @@ class Oc(MycroftSkill):
 
 
 def prepare_searchterm(utterance, searchterm):
+    utterance = utterance.lower()
+    searchterm = searchterm.lower()
     return strip_off_ending(utterance[utterance.index(searchterm):])
 
 
