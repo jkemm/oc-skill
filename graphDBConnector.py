@@ -435,6 +435,7 @@ def search(name, query):
     temp_query = query % name
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
+    return result['results']['bindings'][0];
     if result:
         return check_similarity(result['results']['bindings'], name)
     return "fail"  # result['results']['bindings']
@@ -456,24 +457,8 @@ def check_similarity_multiple(bindings, name, sqlname):
     return "No entry"
 
 
+
 def check_similarity(bindings, name):
-    if len(bindings) <= 0:
-        return "No entry"
-    result = bindings[0]
-
-    sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
-    for b in bindings:
-        temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
-        if sim < temp:
-            sim = temp
-            result = b
-
-    if sim > tolerance:
-        return result
-    return "No entry"
-
-
-def check_sim(bindings, name):
     if len(bindings) <= 0:
         return "No entry"
     elif len(bindings) < 2:

@@ -23,7 +23,7 @@ class Oc(MycroftSkill):
     def handle_search_definition_intent(self, message):
         searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
         result = db.what_is_are_handle(searchterm)
-
+        self.speak(searchterm)
         if result == "No entry":
             self.speak_dialog("no.entry", data={"name": searchterm})
         else:
@@ -157,7 +157,7 @@ def prepare_searchterm(utterance, searchterm):
     utterance = utterance.lower()
     searchterm = searchterm.lower()
     term = strip_off_ending(utterance[utterance.index(searchterm):])
-    return term.translate(translator)
+    return term.translate(translator).strip()
 
 
 def strip_off_ending(searchterm):
