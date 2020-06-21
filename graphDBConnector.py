@@ -39,16 +39,52 @@ PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT * {
   ?search a inst:get_definition ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
-    ?entity schema:description | kgbr:purpose ?des .
+     ?entity schema:description  ?des .
     ?entity schema:name ?name
   
-}
+}ORDER BY DESC(?score)
+"""
+WHAT_IS_PURPOSE = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT * {
+  ?search a inst:get_definition ;
+      :query  "%s~" ;
+      :entities ?entity .
+    ?entity :score ?score .
+     ?entity  kgbr:purpose ?purpose.
+    ?entity schema:name ?name
+  
+}ORDER BY DESC(?score)
+"""
+
+WHAT_IS_DEFINITION = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT * {
+  ?search a inst:get_definition ;
+      :query  "%s~" ;
+      :entities ?entity .
+    ?entity :score ?score .
+     ?entity skos:definition ?def .
+    ?entity schema:name ?name
+  
+}ORDER BY DESC(?score)
 """
 
 WHAT_IS_DIFFERENCE_QUERY = """
@@ -63,7 +99,7 @@ SELECT ?entity ?score ?name ?des{
     ?entity :score ?score .
     ?entity schema:description | kgbr:purpose ?des .
     ?entity schema:name ?name
-}
+}ORDER BY DESC(?score)
 """
 
 USES_QUERY = """
@@ -80,7 +116,7 @@ USES_QUERY = """
         ?entity  <http://www.knowledgegraphbook.ai/schema/uses> ?test .
         ?entity schema:name ?name .
     	?test schema:name ?usesName
-    }
+    }ORDER BY DESC(?score)
 """
 ########
 # Query for How Does xxx Intent, returns one result with highest score
@@ -100,7 +136,7 @@ SELECT ?entity ?des ?name{
     ?entity schema:description ?des .
     ?entity schema:name ?name
 
-}
+}ORDER BY DESC(?score)
 """
 
 WHAT_IS_USAGE_QUERY = """
@@ -116,7 +152,7 @@ SELECT ?entity ?score ?des ?name{
     ?entity schema:description ?des .
     ?entity schema:name ?name
   
-}
+}ORDER BY DESC(?score)
 """
 
 ########
@@ -135,7 +171,7 @@ SELECT ?entity ?des ?name {
     ?entity :score ?score .
     ?entity schema:describe ?des .
     ?entity schema:alternateName ?name
-}
+}ORDER BY DESC(?score)
 """
 
 ########
@@ -157,7 +193,7 @@ SEARCH_HOW_TO_STEP_QUERY = """
         ?step schema:position ?position .
         ?step schema:text ?stepText .
         ?entity schema:name ?name
-    }
+    }ORDER BY DESC(?score)
 """
 
 #######################################################################################
@@ -179,7 +215,7 @@ SEARCH_HOW_MANY_QUERY = """
         ?entity :score ?score .
       ?entity knowledgeGraph:usedByNumberOfPeople ?counter .
       ?entity schema:name ?name 
-}
+}ORDER BY DESC(?score)
 """
 
 ########
@@ -199,7 +235,7 @@ SEARCH_HOW_OFTEN_QUERY = """
       ?entity schema:interactionStatistic ?interaction.
       ?interaction schema:userInteractionCount ?counter .
       ?entity schema:name ?name
-}
+}ORDER BY DESC(?score)
 """
 
 ########
@@ -222,7 +258,7 @@ SEARCH_RELATED_LITERATURE_QUERY = """
         ?relatedLiterature schema:datePublished ?datePublished .
         ?relatedLiterature schema:author ?author .
         ?author schema:name ?authorname .   
-}
+}ORDER BY DESC(?score)
 """
 
 ########
@@ -241,7 +277,7 @@ SEARCH_HOW_CAN_QUERY = """
        ?entity :score ?score .
        ?entity schema:description ?des .
        ?entity schema:name ?name
-}
+}ORDER BY DESC(?score)
 """
 
 SEARCH_EXAMPLE_QUERY = """
@@ -259,7 +295,7 @@ SEARCH_EXAMPLE_QUERY = """
         ?example schema:name ?exampleName .
         ?entity schema:name ?name
       
-    }
+    }ORDER BY DESC(?score)
 """
 
 
@@ -267,6 +303,20 @@ def what_is_are_handle(name):
     binding = search(name, WHAT_IS_ARE_QUERY)
     if binding != "No entry":
         return binding['des']['value']
+    return "No entry"
+
+
+def what_is_purpose_handle(name):
+    binding = search(name, WHAT_IS_PURPOSE)
+    if binding != "No entry":
+        return binding['purpose']['value']
+    return "No entry"
+
+
+def what_is_definition_handle(name):
+    binding = search(name, WHAT_IS_DEFINITION)
+    if binding != "No entry":
+        return binding['def']['value']
     return "No entry"
 
 
@@ -287,7 +337,7 @@ def usage_handle(name):
 def in_which_handle(name):
     binding = search(name, IN_WHICH_QUERY)
     if binding != "No entry":
-        all_binding =  binding['name']['value'] + ", " + binding['des']['value'] 
+        all_binding = binding['name']['value'] + ", " + binding['des']['value']
         return all_binding
     return "No entry"
 

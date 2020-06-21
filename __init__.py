@@ -9,7 +9,8 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 endwords = [
     "used",
-    "needed"
+    "needed",
+    "about"
 ]
 
 
@@ -37,6 +38,26 @@ class Oc(MycroftSkill):
             self.speak_dialog("no.entry", data={"name": searchterm})
         else:
             self.speak(result)
+
+    @intent_handler(IntentBuilder("").require("definition.definition").require("SearchTerm").build())
+    def handle_definition_intent(self, message):
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        result = db.what_is_definition_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
+
+    @intent_handler(IntentBuilder("").require("purpose.definition").require("SearchTerm").build())
+    def handle_purpose_intent(self, message):
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        result = db.what_is_purpose_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
+
+
 
     @intent_handler(IntentBuilder("").require("usage.definition").require("SearchTerm").build())
     def handle_usage_intent(self, message):
