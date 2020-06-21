@@ -156,8 +156,11 @@ def prepare_searchterm(utterance, searchterm):
     translator = str.maketrans(string.punctuation, ' '*len(string.punctuation))
     utterance = utterance.lower()
     searchterm = searchterm.lower()
-    term = strip_off_ending(utterance[utterance.index(searchterm):])
-    return term.translate(translator).strip()
+    index = utterance.find(searchterm)
+    if index != -1:
+        term = strip_off_ending(utterance[index:])
+        return term.translate(translator).strip()
+    return searchterm
 
 
 def strip_off_ending(searchterm):
