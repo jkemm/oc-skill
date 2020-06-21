@@ -435,7 +435,6 @@ def search(name, query):
     temp_query = query % name
     sparql.setQuery(temp_query)
     result = sparql.query().convert()
-    return result['results']['bindings'][0];
     if result:
         return check_similarity(result['results']['bindings'], name)
     return "fail"  # result['results']['bindings']
