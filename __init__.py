@@ -77,7 +77,18 @@ class Oc(MycroftSkill):
         else:
             self.speak_dialog("found.example", data={"examples": result, "name": searchterm})
 
-    ####################################################################################
+     ####################################################################################
+
+    @intent_handler(IntentBuilder("").require("search.keyCharacteristics").require("SearchTerm").build())
+    def handle_search_keyCharacteristics(self, message):
+        searchterm = prepare_searchterm(message.data.get("utterance"), message.data.get("SearchTerm"))
+        result = db.keyCharacteristics_handle(searchterm)
+        if result == "No entry":
+            self.speak_dialog("no.entry", data={"name": searchterm})
+        else:
+            self.speak(result)
+
+    #########
 
     @intent_handler(IntentBuilder("").require("search.methodsHow").require("SearchTerm").build())
     def handle_how_can_intent(self, message):

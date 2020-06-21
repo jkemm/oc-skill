@@ -102,6 +102,21 @@ SELECT ?entity ?score ?name ?des{
 }ORDER BY DESC(?score)
 """
 
+KEY_CHARACTERISTICS_QUERY = """
+PREFIX : <http://www.ontotext.com/connectors/lucene#>
+PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
+PREFIX schema: <http://schema.org/>
+PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+
+SELECT * {
+  ?search a inst:get_example  ;
+      :query  "%s~" ;
+      :entities ?entity .
+    ?entity :score ?score .
+    ?entity schema:name ?name .
+    ?entity <http://www.knowledgegraphbook.ai/schema/keyCharacteristic> ?characterisitcs
+}
+"""
 USES_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
@@ -312,6 +327,11 @@ def what_is_purpose_handle(name):
         return binding['purpose']['value']
     return "No entry"
 
+def keyCharacteristics_handle(name):
+    binding = search_multiple(name, KEY_CHARACTERISTICS_QUERY, "characterisitcs")
+    if binding != "No entry":
+        return binding
+    return "No entry"
 
 def what_is_definition_handle(name):
     binding = search(name, WHAT_IS_DEFINITION)
