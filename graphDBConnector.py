@@ -468,7 +468,7 @@ def check_similarity(bindings, name):
     sim = diff.SequenceMatcher(None, name, bindings[0]['name']['value']).ratio()
 
     for b in bindings:
-        if b['score']['value'] < result['score']['value']:
+        if float(b['score']['value']) < float(result['score']['value']):
             break
 
         temp = diff.SequenceMatcher(None, name, b['name']['value']).ratio()
