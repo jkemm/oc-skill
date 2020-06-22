@@ -16,5 +16,15 @@ G2.1
 ## Category
 **Information**
 
+To Process the Input the Adapt Intent Parser was used.
+
+To enhance the sparql queries 
+we used the Lucene Connector. In addition we added a string compare if Lucene returns multiple entities with max value.
+
+By changing the tolerance value in the graphDBConnector.py module you can change how similar the search term and the entity name have to be.
+tolerance = 0 means no similarity is needed.
 ## Tags
+
+##Version
+This version was tested with the graphDb version of 21.06.2020
 
