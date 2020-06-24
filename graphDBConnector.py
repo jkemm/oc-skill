@@ -38,11 +38,11 @@ WHAT_IS_ARE_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT * {
-  ?search a inst:get_definition ;
+  ?search a inst:get_definition2 ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -55,11 +55,11 @@ WHAT_IS_PURPOSE = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT * {
-  ?search a inst:get_definition ;
+  ?search a inst:get_definition2 ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -73,11 +73,11 @@ WHAT_IS_DEFINITION = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT * {
-  ?search a inst:get_definition ;
+  ?search a inst:get_definition2 ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -91,9 +91,9 @@ WHAT_IS_DIFFERENCE_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 SELECT ?entity ?score ?name ?des{
-  ?search a inst:get_difference ;
+  ?search a inst:get_difference2 ;
       :query  "%s" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -106,10 +106,10 @@ KEY_CHARACTERISTICS_QUERY = """
 PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
-PREFIX kgbr: <http://www.knowledgegraphbook.ai/schema/>
+PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 
 SELECT * {
-  ?search a inst:get_example  ;
+  ?search a inst:get_example2  ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -124,7 +124,7 @@ USES_QUERY = """
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     
     SELECT * {
-      ?search a inst:get_use ;
+      ?search a inst:get_use2 ;
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
@@ -143,7 +143,7 @@ PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?entity ?des ?name{
-  ?search a inst:how_does ;
+  ?search a inst:how_does2 ;
       :query  "%s" ;
       :limit "1" ;
       :entities ?entity .
@@ -160,7 +160,7 @@ PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?entity ?score ?des ?name{
-  ?search a inst:get_usage ;
+  ?search a inst:get_usage2 ;
       :query  "%s" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -179,7 +179,7 @@ PREFIX : <http://www.ontotext.com/connectors/lucene#>
 PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
 PREFIX schema: <http://schema.org/>
 SELECT ?entity ?des ?name {
-  ?search a inst:in_which ;
+  ?search a inst:in_which2 ;
       :query  "%s" ;
       :entities ?entity ;
       :limit "1" .
@@ -199,7 +199,7 @@ SEARCH_HOW_TO_STEP_QUERY = """
     PREFIX schema: <http://schema.org/>
 
     SELECT ?position ?stepText ?name {
-      ?search a inst:get_HowToStep ;
+      ?search a inst:get_HowToStep2 ;
           :query  "%s" ;
           :limit "1" ;
           :entities ?entity .
@@ -224,7 +224,7 @@ SEARCH_HOW_MANY_QUERY = """
     PREFIX knowledgeGraph: <http://www.knowledgegraphbook.ai/schema/>
 
     SELECT * {
-      ?search a inst:get_howMany ;
+      ?search a inst:get_howMany2 ;
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
@@ -243,7 +243,7 @@ SEARCH_HOW_OFTEN_QUERY = """
     PREFIX schema: <http://schema.org/>
 
     SELECT * {
-      ?search a inst:get_howOften ;
+      ?search a inst:get_howOften2 ;
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
@@ -264,7 +264,7 @@ SEARCH_RELATED_LITERATURE_QUERY = """
     PREFIX knowledge: <http://www.knowledgegraphbook.ai/schema/>
 
     SELECT * {
-      ?search a inst:get_additionalLiterature  ;
+      ?search a inst:get_additionalLiterature2  ;
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
@@ -286,7 +286,7 @@ SEARCH_HOW_CAN_QUERY = """
    PREFIX schema: <http://schema.org/>
 
    SELECT * {
-     ?search a inst:get_howCan ;
+     ?search a inst:get_howCan2 ;
          :query  "%s~" ;
          :entities ?entity .
        ?entity :score ?score .
@@ -302,7 +302,7 @@ SEARCH_EXAMPLE_QUERY = """
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     
     SELECT * {
-      ?search a inst:get_example ;
+      ?search a inst:get_example2 ;
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
