@@ -128,7 +128,7 @@ USES_QUERY = """
           :query  "%s~" ;
           :entities ?entity .
         ?entity :score ?score .
-        ?entity  <http://www.knowledgegraphbook.ai/schema/uses> ?test .
+        ?entity  <http://knowledgegraphbook.ai/schema/uses> ?test .
         ?entity schema:name ?name .
     	?test schema:name ?usesName
     }ORDER BY DESC(?score)
@@ -221,7 +221,7 @@ SEARCH_HOW_MANY_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
-    PREFIX knowledgeGraph: <http://www.knowledgegraphbook.ai/schema/>
+    PREFIX knowledgeGraph: <http://knowledgegraphbook.ai/schema/>
 
     SELECT * {
       ?search a inst:get_howMany2 ;
@@ -230,7 +230,7 @@ SEARCH_HOW_MANY_QUERY = """
         ?entity :score ?score .
       ?entity knowledgeGraph:usedByNumberOfPeople ?counter .
       ?entity schema:name ?name 
-}ORDER BY DESC(?score)
+    }ORDER BY DESC(?score)
 """
 
 ########
@@ -261,7 +261,7 @@ SEARCH_RELATED_LITERATURE_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
-    PREFIX knowledge: <http://www.knowledgegraphbook.ai/schema/>
+    PREFIX knowledge: <http://knowledgegraphbook.ai/schema/>
 
     SELECT * {
       ?search a inst:get_additionalLiterature2  ;
@@ -327,11 +327,13 @@ def what_is_purpose_handle(name):
         return binding['purpose']['value']
     return "No entry"
 
+
 def keyCharacteristics_handle(name):
     binding = search_multiple(name, KEY_CHARACTERISTICS_QUERY, "characterisitcs")
     if binding != "No entry":
         return binding
     return "No entry"
+
 
 def what_is_definition_handle(name):
     binding = search(name, WHAT_IS_DEFINITION)
@@ -474,7 +476,6 @@ def check_similarity_multiple(bindings, name, sqlname):
     if sim > tolerance:
         return str(final_result)
     return "No entry"
-
 
 
 def check_similarity(bindings, name):
