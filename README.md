@@ -26,5 +26,5 @@ tolerance = 0 means no similarity is needed.
 ## Tags
 
 ##Version
-This version was tested with the graphDb version of 21.06.2020
+This version was tested with the graphDb version of 7.07.2020
 
