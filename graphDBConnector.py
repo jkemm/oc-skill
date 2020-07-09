@@ -46,7 +46,7 @@ SELECT * {
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
-     ?entity schema:description  ?des .
+    ?entity schema:description  ?des .
     ?entity schema:name ?name
   
 }ORDER BY DESC(?score)
@@ -59,7 +59,7 @@ PREFIX kgbr: <http://knowledgegraphbook.ai/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT * {
-  ?search a inst:get_definition2 ;
+  ?search a inst:get_definition5 ;
       :query  "%s~" ;
       :entities ?entity .
     ?entity :score ?score .
@@ -198,7 +198,7 @@ SEARCH_HOW_TO_STEP_QUERY = """
     PREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>
     PREFIX schema: <http://schema.org/>
 
-    SELECT ?position ?stepText ?name {
+    SELECT ?position ?stepText ?name ?score {
       ?search a inst:get_HowToStep2 ;
           :query  "%s" ;
           :limit "1" ;
@@ -255,7 +255,7 @@ SEARCH_HOW_OFTEN_QUERY = """
 
 ########
 # Query for related Literature, searches name (e.g. Machine Learning, Schema.org, ...) and returns information about related article
-# Example: How often is Schema.org used?
+# Example: What is related literature for machine Learning?
 ########
 SEARCH_RELATED_LITERATURE_QUERY = """
     PREFIX : <http://www.ontotext.com/connectors/lucene#>
@@ -432,16 +432,6 @@ def example_handle(name):
     if binding != "No entry":
         return binding
     return "No entry"
-
-
-def search_fritz():
-    sparql.setQuery(SEARCH_FRITZ)
-    result = sparql.query().convert()
-    bindings = result['results']['bindings']
-    n = bindings[0]['name']['value']
-    if len(n) > 0:
-        return n
-    return "fail"
 
 
 def search_multiple(name, query, sqlname):
